@@ -1,5 +1,5 @@
 <h1 align="center">Library</h1>
-<p align="center"><a href="https://www.nishikoto.fr">Website of creator</a> - <a href="https://docs.nishikoto.fr">Documentation</a> - <a href="https://discord.nishikoto.fr">Discord</a></p>
+<p align="center"><a target="_blank" href="https://www.nishikoto.fr">Website of creator</a> - <a target="_blank" href="https://docs.nishikoto.fr">Documentation</a> - <a target="_blank" href="https://discord.nishikoto.fr">Discord</a></p>
 
 ---
 
@@ -11,8 +11,8 @@
         <td style="font-weight: bold;">Module</td>
     </tr>
     <tr>
-        <td><a href="https://github.com/JustGodWork">Justgod</a></td>
-        <td>require on <a href="https://github.com/JustGodWork/lib/blob/main/imports.lua#L37">lib</a></td>
+        <td><a target="_blank" href="https://github.com/JustGodWork">Justgod</a></td>
+        <td>require on <a target="_blank" href="https://github.com/JustGodWork/lib/blob/main/imports.lua#L37">lib</a></td>
     </tr>
 </table>
 
@@ -21,7 +21,7 @@
 <h4 align="center">License</h4>
 <table align="ceter">
     <caption style="caption-side: bottom; font-family: monospace; font-size: 13px;">
-        MIT License - <a href="https://spdx.org/licenses/MIT.html">See More</a>
+        MIT License - <a target="_blank" href="https://spdx.org/licenses/MIT.html">See More</a>
     </caption>
     <tr>
       <td>
