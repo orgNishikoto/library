@@ -8,6 +8,7 @@ nlib = {};
 
 nlib.enum = require 'enums.index';
 nlib.console = require 'console.index';
+nlib.resource = require 'resource.index';
 
 if (lib.is_server) then
     nlib.github = require 'github.index';

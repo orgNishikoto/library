@@ -3,8 +3,9 @@ game 'gta5';
 lua54 'yes';
 
 name 'Library';
-author 'Nishikoto <www.nishikoto.fr>';
-version 'fork-alpha-0.1.1';
+author 'Nishikoto <https://www.nishikoto.fr>';
+version 'fork-alpha-0.1.2';
+description 'coucou';
 
 shared_script '@lib/imports.lua';
 shared_script 'imports.lua';
@@ -15,6 +16,7 @@ files {
     'github/**',
     'version/**',
     'console/**',
+    'resource/**'
 }
 
 dependency 'lib';
