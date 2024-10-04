@@ -1,7 +1,7 @@
 AddEventHandler('onResourceStart', function(resName)
     if (resName ~= ENV.name) then return end;
 
-    local version = GetResourceMetadata(ENV.name, 'version', GetNumResourceMetadata(ENV.name, 'version') - 1);
+    local version = nlib.resource.version(ENV.name);
     local status = nlib.version.compare('orgNishikoto', 'library', version:match('%d%.%d+%.%d+'));
 
     nlib.console.print(('^7[^0Library^7] ^4Version ^6%s^0'):format(version));
