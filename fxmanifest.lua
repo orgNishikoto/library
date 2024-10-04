@@ -5,7 +5,6 @@ lua54 'yes';
 name 'Library';
 author 'Nishikoto <https://www.nishikoto.fr>';
 version 'fork-alpha-0.1.2';
-description 'coucou';
 
 shared_script '@lib/imports.lua';
 shared_script 'imports.lua';
@@ -16,7 +15,9 @@ files {
     'github/**',
     'version/**',
     'console/**',
-    'resource/**'
+    'resource/**',
+    'kvp/**',
+    'string/**'
 }
 
 dependency 'lib';
