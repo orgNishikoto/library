@@ -27,7 +27,7 @@ local intKVP = {};
 ---@param valtype string
 ---@return boolean
 local function type_is_authorized(valtype)
-    if (not valtype or type(valtype) ~= 'string') then return end;
+    if (not valtype or nlib.string.type(valtype) ~= 'string') then return end;
     return _TYPE[valtype].authorized;
 end
 
@@ -36,8 +36,8 @@ end
 ---@param name string
 ---@return string
 local function format_key(valtype, name)
-    if (not name or type(name) ~= 'string') then return end;
-    if (not valtype or type(valtype) ~= 'string') then return end;
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if (not valtype or nlib.string.type(valtype) ~= 'string') then return end;
     return ('%s:%s(%s)'):format('NISHILIB_', name, _TYPE[valtype].value);
 end
 
@@ -45,13 +45,13 @@ end
 ---@param name string
 ---@return boolean
 local function is_kvp_exist(valtype, name)
-    if (not name or type(name) ~= 'string') then return end;
-    if (not valtype or type(valtype) ~= 'string') then return end;
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if (not valtype or nlib.string.type(valtype) ~= 'string') then return end;
 
     if (valtype == 'number') then
-        return GetResourceKvpInt(setformat(valtype, name)) and true or false;
+        return GetResourceKvpInt(format_key(valtype, name)) and true or false;
     elseif (valtype == 'float') then
-        return GetResourceKvpFloat(setformat(valtype, name)) and true or false;
+        return GetResourceKvpFloat(format_key(valtype, name)) and true or false;
     else
         return GetResourceKvpString(format_key(valtype, name)) and true or false;
     end
@@ -72,7 +72,7 @@ local function prepare_value_and_typeof(value)
 end
 
 function intKVP.Set(name, value)
-    if (not name or type(name) ~= 'string') then return end;
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
     if (not value) then return end;
 
     local typeof, _value = prepare_value_and_typeof(value);
@@ -81,16 +81,12 @@ function intKVP.Set(name, value)
         error('Type of value is not authorized!', 3);
     end;
 
-    SetResourceKvpFloat(format_key(typeof, name), _value);
-
-    if (not is_kvp_exist(typeof, name)) then
-        if (typeof == 'number') then
-            SetResourceKvpInt(setformat(typeof, name), _value);
-        elseif (typeof == 'float') then
-            SetResourceKvpFloat(setformat(typeof, name), _value);
-        else
-            SetResourceKvp(setformat(typeof, name), _value);
-        end
+    if (typeof == 'number') then
+        SetResourceKvpInt(format_key(typeof, name), _value);
+    elseif (typeof == 'float') then
+        SetResourceKvpFloat(format_key(typeof, name), _value);
+    else
+        SetResourceKvp(format_key(typeof, name), _value);
     end
 end
 
@@ -100,6 +96,12 @@ function intKVP.GetNumber(name)
     if (not name) then return end;
     local exist = is_kvp_exist('number', name);
     return exist and GetResourceKvpInt(format_key('number', name)) or 0;
+end
+
+---@param name string
+---@return number
+function intKVP.GetInt(name)
+    return intKVP.GetNumber(name);
 end
 
 ---@param name string
@@ -115,7 +117,7 @@ end
 function intKVP.GetString(name)
     if (not name) then return end;
     local exist = is_kvp_exist('string', name);
-    return exist and GetExternalKvpString(format_key('string', name)) or '';
+    return exist and GetResourceKvpString(format_key('string', name)) or '';
 end
 
 ---@param name string
@@ -136,9 +138,15 @@ end
 
 ---@param name string
 ---@return boolean
-function intKVP.ExistInt(name)
+function intKVP.ExistNumber(name)
     if (not name) then return end;
     return is_kvp_exist('number', name);
+end
+
+---@param name string
+---@return boolean
+function intKVP.ExistInt(name)
+    return intKVP.ExistNumber(name);
 end
 
 ---@param name string
@@ -169,8 +177,39 @@ function intKVP.ExistBoolean(name)
     return is_kvp_exist('boolean', name);
 end
 
--- Add
--- Delete
--- Edit
+---@param name string
+function intKVP.DeleteNumber(name)
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if is_kvp_exist('number', name) then DeleteResourceKvp(format_key('number', name)) end;
+end
+
+---@param name string
+function intKVP.DeleteInt(name)
+    intKVP.DeleteNumber(name)
+end
+
+---@param name string
+function intKVP.DeleteFloat(name)
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if is_kvp_exist('float', name) then print('deleted') DeleteResourceKvp(format_key('float', name)) end;
+end
+
+---@param name string
+function intKVP.DeleteTable(name)
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if is_kvp_exist('table', name) then DeleteResourceKvp(format_key('table', name)) end;
+end
+
+---@param name string
+function intKVP.DeleteBoolean(name)
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if is_kvp_exist('boolean', name) then DeleteResourceKvp(format_key('boolean', name)) end;
+end
+
+---@param name string
+function intKVP.DeleteString(name)
+    if (not name or nlib.string.type(name) ~= 'string') then return end;
+    if is_kvp_exist('string', name) then DeleteResourceKvp(format_key('string', name)) end;
+end
 
 return intKVP;
