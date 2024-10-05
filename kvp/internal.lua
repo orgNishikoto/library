@@ -85,7 +85,11 @@ function intKVP.Set(name, value)
         SetResourceKvpInt(format_key(typeof, name), _value);
     elseif (typeof == 'float') then
         SetResourceKvpFloat(format_key(typeof, name), _value);
-    else
+    elseif (typeof == 'table') then
+        SetResourceKvp(format_key(typeof, name), json.encode(_value));
+    elseif (typeof == 'boolean') then
+        SetResourceKvp(format_key(typeof, name), tostring(_value));
+    elseif (typeof == 'string') then
         SetResourceKvp(format_key(typeof, name), _value);
     end
 end
@@ -125,7 +129,7 @@ end
 function intKVP.GetTable(name)
     if (not name) then return end;
     local exist = is_kvp_exist('table', name);
-    return exist and json.decode(GetExternalKvpString(format_key('table', name))) or {};
+    return exist and json.decode(GetResourceKvpString(format_key('table', name))) or {};
 end
 
 ---@param name string
@@ -133,7 +137,7 @@ end
 function intKVP.GetBoolean(name)
     if (not name) then return end;
     local exist = is_kvp_exist('boolean', name);
-    return exist and nlib.string.tobool(GetExternalKvpString(format_key('boolean', name))) or false;
+    return exist and nlib.string.tobool(GetResourceKvpString(format_key('boolean', name))) or false;
 end
 
 ---@param name string
