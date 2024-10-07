@@ -86,9 +86,9 @@ function intKVP.Set(name, value)
     elseif (typeof == 'float') then
         SetResourceKvpFloat(format_key(typeof, name), _value);
     elseif (typeof == 'table') then
-        SetResourceKvp(format_key(typeof, name), json.encode(_value));
+        SetResourceKvp(format_key(typeof, name), _value);
     elseif (typeof == 'boolean') then
-        SetResourceKvp(format_key(typeof, name), tostring(_value));
+        SetResourceKvp(format_key(typeof, name), _value);
     elseif (typeof == 'string') then
         SetResourceKvp(format_key(typeof, name), _value);
     end
