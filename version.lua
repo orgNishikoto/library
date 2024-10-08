@@ -13,6 +13,6 @@ AddEventHandler('onResourceStart', function(resName)
     elseif (status == 'equal') then
         nlib.console.success(('^7[^2--------^7] ^0Vous êtes à jour en ^6%s.^0'):format(version));
     elseif (status == 'error') then
-        nlib.console.err('Une erreur lors de la récupération de version de dépôt \'library\' est survenue. Si le problème persiste veuillez contacter le créateur de la bibliothèque ou de la version de la bibliothèque que vous utilisez.');
+        nlib.console.err('Une erreur lors de la récupération de version de dépôt \'library\' est survenue. Si le problème persiste veuillez contacter le créateur de la bibliothèque ou de la version de la bibliothèque que vous utilisez.\nVous êtes potientiellement "rate limit".');
     end
 end)
