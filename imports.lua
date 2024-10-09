@@ -1,5 +1,5 @@
 ENV = {};
-ENV.current_name = GetCurrentResourceName();
+ENV.current_name = lib.current_resource;
 ENV.name = 'library'; 
 
 lib.set_required_resource(ENV.name);
@@ -16,5 +16,7 @@ if (lib.is_server) then
     nlib.github = require 'github.index';
     nlib.version = require 'version.index';
 end
+
+lib.set_required_resource(ENV.current_name);
 
 -- ❤️ Thanks to Justgod for the require system.
